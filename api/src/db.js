@@ -6,6 +6,9 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
 
+const countryModel= require('./models/Country.js');
+const activitiesModel= require('./models/Activities.js');
+
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/countries`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
@@ -21,6 +24,9 @@ fs.readdirSync(path.join(__dirname, '/models'))
     modelDefiners.push(require(path.join(__dirname, '/models', file)));
   });
 
+  countryModel(sequelize);
+  activitiesModel(sequelize);
+
 // Injectamos la conexion (sequelize) a todos los modelos
 modelDefiners.forEach(model => model(sequelize));
 // Capitalizamos los nombres de los modelos ie: product => Product
@@ -30,10 +36,12 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Pokemon } = sequelize.models;
+const { Countries, Activities } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
+Countries.belongsToMany(Activities, {through: 'country_types'});
+Activities.belongsToMany(Countries, {through: 'country_types'});
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

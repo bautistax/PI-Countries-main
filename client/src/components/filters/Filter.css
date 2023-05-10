@@ -1,0 +1,35 @@
+.filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top:20px;
+}
+
+.filter_select {
+    background-color: #fff;
+    width: 150px;
+    padding: 0.25rem 0.25rem;
+    margin: 0 5px;
+    border-radius: 5px;
+    font-family: var(--font-family);
+    cursor: pointer;
+}
+
+
+.filter > button {
+    border: 1px solid #eee;
+    border-radius: 5px;
+    outline: none;
+    padding: 0.35rem 1rem;
+    background-color: #eee;
+    color: #111;
+    margin: 0 10px;
+    cursor: pointer;
+    font-family: var(--font-family);
+    transition: all 0.5s;
+}
+
+.filter > button:hover {
+    background-color:lightslategray;
+    color: #eee;
+}

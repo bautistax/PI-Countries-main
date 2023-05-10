@@ -1,0 +1,46 @@
+.loader {
+    height: 100vh;
+    background-color: transparent;
+    color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    -webkit-animation: loader 1.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) ;
+	        animation: loader 1.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) ;
+}
+
+.loader > h1 {
+    font-size: 50px;
+    margin:51px;
+    padding: 25px;
+    border: 2px solid #111;
+    border-radius: 10px;
+    color:#111;
+}
+
+@-webkit-keyframes loader {
+    0% {
+      opacity: 1;
+    }
+    60% {
+      opacity: 0.8;
+    }
+    100% {
+      letter-spacing: 1em;
+      opacity: 0;
+    }
+  }
+  @keyframes loader {
+    0% {
+      opacity: 1;
+    }
+    60% {
+      opacity: 0.8;
+    }
+    100% {
+      letter-spacing: 1em;
+      opacity: 0;
+    }
+  }
+  

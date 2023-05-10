@@ -1,0 +1,69 @@
+.navbar {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    -webkit-animation: navbar 2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: navbar 2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+@keyframes navbar{0%{transform:scaleX(0);opacity:1}100%{transform:scaleX(1);opacity:1}}
+
+.home_button {
+    position: absolute;
+    top: 5;
+    left: 0;
+    background:transparent;
+    border-radius: 20px;
+    border: 3px dotted lightseagreen;
+    padding: 0.7rem 1.3rem;
+    color:lightcyan;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+ .navbar_header {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 93%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}  
+
+.navbar_create_button {
+    position: absolute;
+    top: 5;
+    right: 0;
+    align-items: center;
+    justify-content: center;
+    text-decoration: underline;
+}
+
+.navbar_create_button:hover {
+    text-decoration: underline;
+}
+
+
+.navbar_form {
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.navbar_create_button > a {
+    background:transparent;
+    border-radius: 20px;
+    border: 3px dotted lightseagreen;
+    padding: 0.7rem 1.3rem;
+    color:lightcyan;
+    cursor: pointer;
+}
+
+.navbar_create_button > a > span {
+    display: inline-block;
+}

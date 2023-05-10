@@ -1,0 +1,33 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    -webkit-animation: pagination 2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: pagination 2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+@keyframes pagination{0%{transform:scaleX(0);opacity:1}100%{transform:scaleX(1);opacity:1}}
+
+.pagination > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #eee;
+    color: #111;
+    width: 25px;
+    height: 25px;
+    padding: 1rem;
+    margin: 10px 7px;
+    cursor: pointer;
+    transition: all 0.5s;
+    outline: none;
+    border: 1px solid transparent;
+}
+
+.pagination > button:hover {
+    color: #eee;
+    background: lightsteelblue;
+    border: 1px solid #eee;
+}
