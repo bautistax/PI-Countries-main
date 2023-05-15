@@ -6,10 +6,12 @@ import {
     GET_ALL_ACTIVITIES,
     FILTER_COUNTRIES_BY_CONTINENT,
     FILTER_ACTIVITIES,
-    FILTER_BY_AZ,
-    ORDER_BY_POPULATION,
+    // FILTER_BY_AZ,
+    // ORDER_BY_POPULATION,
     FILTER_BY_POPULATION,
     CLEAR_FILTERS,
+    PAGINATED,
+    SORT_BY
 } from '../actions/index.js';
 
 const initialState = {
@@ -17,7 +19,8 @@ const initialState = {
     countriesSorted: [],
     countryDetail: [],
     activities: [],
-    error: []
+    error: [],
+    paginated: 1
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -52,39 +55,48 @@ const rootReducer = (state = initialState, action) => {
             };
 
         case FILTER_ACTIVITIES:
-                const allCountry = state.countriesSorted
-                const activityFilter = action.payload === 'act' ? allCountry.filter(f=> f.Activities.length!==0): action.payload === 'noA'? allCountry.filter(f=>!f.Activities.length) : allCountry
-                return {
-                    ...state,
-                    countriesSorted:activityFilter
-                };
+                // const allCountry = state.countriesSorted
+                // const activityFilter = action.payload === 'act' ? allCountry.filter(f=> f.Activities.length!==0): action.payload === 'noA'? allCountry.filter(f=>!f.Activities.length) : allCountry
+                // return {
+                //     ...state,
+                //     countriesSorted:activityFilter
+                // };
+
+                const auxContries = state.countries;
+                const filtered = auxContries.filter((country) =>
+                country.Activities.some((activity) => activity.name === action.payload)
+            )
+            return {
+                ...state,
+                countriesSorted: filtered
+            }
         case GET_ALL_ACTIVITIES:
             return {
                 ...state,
                 activities: action.payload,
             };
-        case FILTER_BY_AZ: 
-            return {
-                ...state,
-                countriesSorted: action.payload,
-            };
-        case ORDER_BY_POPULATION:
-            if (action.payload === "POP-") {
-                return {
-                  ...state,
-                  countriesSorted: state.countries.slice().sort((a, b) => a.population - b.population)
-                }
-            } else if (action.payload === "POP+") {
-                return {
-                  ...state,
-                  countriesSorted: state.countries.slice().sort((a, b) => b.population - a.population)
-                }
-            }else{
-                return {
-                    ...state,
-                    countriesSorted: state.countries
-                }
-            };
+        // case FILTER_BY_AZ: 
+        //     return {
+        //         ...state,
+        //         countriesSorted: action.payload,
+        //     };
+        // case ORDER_BY_POPULATION:
+        //     if (action.payload === "POP-") {
+        //         return {
+        //           ...state,
+        //           countriesSorted: state.countries.slice().sort((a, b) => a.population - b.population)
+        //         }
+        //     } else if (action.payload === "POP+") {
+        //         return {
+        //           ...state,
+        //           countriesSorted: state.countries.slice().sort((a, b) => b.population - a.population)
+        //         }
+        //     }else{
+        //         return {
+        //             ...state,
+        //             countriesSorted: state.countries
+        //         }
+        //     };
             
         case FILTER_BY_POPULATION:
             const newCountries = state.countriesSorted;
@@ -101,6 +113,53 @@ const rootReducer = (state = initialState, action) => {
                 countriesSorted: [],
                 error: {},
             };
+
+        case PAGINATED:
+            return {
+                ...state,
+                paginated: action.payload,
+            };
+
+           case SORT_BY:
+             if (action.payload === "POP-") {
+                return {
+                    ...state,
+                    countriesSorted: state.countriesSorted.slice().sort((a, b) => a.population - b.population)
+                }
+
+            } else if (action.payload === "POP+") {
+
+                return {
+                    ...state,
+                    countriesSorted: state.countriesSorted.slice().sort((a, b) => b.population - a.population)
+                }
+            } else if (action.payload === "ASC") {
+                const result = state.countriesSorted.slice().sort((a, b) => {
+                    if (a.name < b.name) return -1
+                    if (b.name < a.name) return 1
+                    return 0
+                })
+                return {
+                    ...state,
+                    countriesSorted: result
+                }
+            } else if (action.payload === "DES") {
+                const result = state.countriesSorted.slice().sort((a, b) => {
+                    if (a.name < b.name) return -1
+                    if (b.name < a.name) return 1
+                    return 0
+                })
+                return {
+                    ...state,
+                    countriesSorted: result.reverse()
+                }
+            } else {
+                return {
+                    ...state,
+                    countriesSorted: state.countries
+                }
+            }
+            
         default: 
             return { ...state };
     }

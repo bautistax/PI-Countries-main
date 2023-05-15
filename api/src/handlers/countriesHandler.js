@@ -1,3 +1,4 @@
+const { json } = require('sequelize');
 const {getCountriesById, getAllCountries, getCountriesByName} = require('../controllers/countriesControllers.js');
 
 const getCountriesHandler = async (req,res) => {
@@ -19,14 +20,12 @@ const getCountriesHandler = async (req,res) => {
     }
 }
 
-const getCountriesHandlerById = async (req,res) => {
+const getCountriesHandlerById =  (req,res) => {
     const {id} = req.params;
-    try {
-        const response = await getCountriesById(id);
-        res.status(200).json(response);
-    } catch (error) {
-        res.status(404).json({error: error.message});
-    }
+    getCountriesById(id)
+    .then(response=> res.status(200).json (response))
+     .catch(error=>res.status(400).json(error)) ;
+    
 };
 
 module.exports = {getCountriesHandlerById, getCountriesHandler};

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { getCountryByName } from '../../redux/actions/index.js';
 import './SearchBar.css';
 
-const SearchBar = ({ setCurrentPage, setLoading }) => {
+const SearchBar = ({  setLoading }) => {
     const [countries, setCountries] = useState('');
     const [error, setError] = useState(false);
     const dispatch = useDispatch();
@@ -16,7 +16,6 @@ const SearchBar = ({ setCurrentPage, setLoading }) => {
         }
         setError(false);
         dispatch(getCountryByName(countries));
-        setCurrentPage(1);
         setLoading(true);
         setTimeout(()=>{
             setLoading(false)

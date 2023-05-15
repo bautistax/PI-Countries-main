@@ -5,11 +5,13 @@ export const GET_COUNTRY_BY_NAME = 'GET_COUNTRY_BY_NAME';
 export const CREATE_ACTIVITIES = 'CREATE_ACTIVITIES';
 export const FILTER_COUNTRIES_BY_CONTINENT = 'FILTER_COUNTRIES_BY_CONTINENT';
 export const FILTER_ACTIVITIES = 'FILTER_ACTIVITIES';
-export const FILTER_BY_AZ = 'FILTER_BY_AZ';
-export const ORDER_BY_POPULATION = 'ORDER_BY_POPULATION';
+// export const FILTER_BY_AZ = 'FILTER_BY_AZ';
+// export const ORDER_BY_POPULATION = 'ORDER_BY_POPULATION';
 export const FILTER_BY_POPULATION = 'FILTER_BY_POPULATION';
 export const CLEAR_FILTERS = 'CLEAR_FILTERS';
 export const GET_ALL_ACTIVITIES = 'GET_ALL_ACTIVITIES';
+export const PAGINATED = 'PAGINATED'; 
+export const SORT_BY = 'SORT_BY';
 
 export const getAllCountries = () => {
     return async function (dispatch){
@@ -81,29 +83,29 @@ export const filterActivities = (payload) => {
     }
 };
 
-export const orderByName = (sort, countries) => {
-    return function (dispatch){
-        let countriesSorted = [...countries];
-        countriesSorted = countriesSorted.sort((a,b)=>{
-            if(a.name.toLowerCase() < b.name.toLowerCase())
-            return sort === 'AZ' ? -1 : 1
-            if(a.name.toLowerCase() > b.name.toLowerCase())
-            return sort === 'AZ' ? 1 : -1
-            return 0;
-        });
-        return dispatch({
-            type:FILTER_BY_AZ,
-            payload:countriesSorted,
-        });
-    }
-};
+// export const orderByName = (sort, countries) => {
+//     return function (dispatch){
+//         let countriesSorted = [...countries];
+//         countriesSorted = countriesSorted.sort((a,b)=>{
+//             if(a.name.toLowerCase() < b.name.toLowerCase())
+//             return sort === 'AZ' ? -1 : 1
+//             if(a.name.toLowerCase() > b.name.toLowerCase())
+//             return sort === 'AZ' ? 1 : -1
+//             return 0;
+//         });
+//         return dispatch({
+//             type:FILTER_BY_AZ,
+//             payload:countriesSorted,
+//         });
+//     }
+// };
 
-export const orderByPopulation = (payload) => {
-    return {
-        type: ORDER_BY_POPULATION,
-        payload,
-    }
-};
+// export const orderByPopulation = (payload) => {
+//     return {
+//         type: ORDER_BY_POPULATION,
+//         payload,
+//     }
+// };
 
 
 export const filterByPopulation = (payload) => {
@@ -121,3 +123,17 @@ export const clearFilters = countries =>{
         payload: countries
     }
 };
+
+export  const getPages = (payload) => {
+    return {
+        type: PAGINATED,
+        payload
+    }
+};
+
+export const sortBy = (payload) => {
+    return {
+        type: SORT_BY,
+        payload
+    }
+}
