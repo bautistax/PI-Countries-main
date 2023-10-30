@@ -79,7 +79,7 @@ const Filters = () => {
              <select  onChange={HandlerSort}  className="filter_select">
                 <option value="All">Order by Population</option>
                 <option value="POP+">HIGHER POPULATION</option>
-                 <option value="POP-">LESS POPULATION</option>
+                 <option value="POP-">LESSER POPULATION</option>
             </select>
                     
             <button onClick={e=> {filterByPop(e)}}>
