@@ -3,7 +3,7 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import {Home, Landing, Details, Create} from './pages/index.js';
 import axios from 'axios';
-axios.defaults.baseURL = "https://pi-countries-main-dev-nptx.3.us-1.fl0.io/";
+axios.defaults.baseURL = "https://pi-countries-main-dev-nptx.3.us-1.fl0.io";
 
 
 function App() {
